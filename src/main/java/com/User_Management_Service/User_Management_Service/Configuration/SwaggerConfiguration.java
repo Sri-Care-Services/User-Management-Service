@@ -13,18 +13,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "LaFresca Backend API",
+                title = "Sri Care Backend API",
                 version = "1.0",
-                description = "API documentation for the LaFresca Backend",
+                description = "API documentation for the Sri Care Backend",
                 contact = @Contact(
-                        name = "Dasun Thathsara",
-                        email = "dasunthathsara974@gmail.com"
+                        name = "Suruthi Manivannan",
+                        email = "suruthi0611@gmail.com"
                 ),
                 license = @License(
                         name = "GPL-3.0 license",
                         url = "https://www.gnu.org/licenses/"
                 ),
-                termsOfService = "Term of service"
+                termsOfService = "Terms of service"
         ),
         servers = {
                 @Server(
@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
                 ),
                 @Server(
                         description = "Production ENV",
-                        url = "https://lafresca.com"
+                        url = "https://sri-care.com"
                 )
         },
         security = {
