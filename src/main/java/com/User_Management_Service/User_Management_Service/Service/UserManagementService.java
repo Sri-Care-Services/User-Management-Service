@@ -185,4 +185,18 @@ public class UserManagementService {
         }
         return resp;
     }
+
+    public String getEmail(long userId) {
+        Optional<Users> usersOptional = usersRepo.findById(userId);
+        return usersOptional.map(Users::getEmail).orElse("User not found");
+    }
+
+    public String getName(long userId) {
+        Optional<Users> usersOptional = usersRepo.findById(userId);
+        return usersOptional.map(Users::getName).orElse("User not found");
+    }
+
+    public List<Users> getAllUsersByRole() {
+        return usersRepo.findAllByRole("USER");
+    }
 }
