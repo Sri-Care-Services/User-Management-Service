@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
+
 @Tag(name = "User Management Controller")
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +33,6 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-
     public ResponseEntity<ReqRes> register(@RequestBody ReqRes reg) {
         return ResponseEntity.ok(userManagementService.register(reg));
     }
@@ -66,14 +67,13 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-
     public ResponseEntity<ReqRes> refreshToken(@RequestBody ReqRes req) {
         return ResponseEntity.ok(userManagementService.refreshToken(req));
     }
 
     @GetMapping("/admin/get-all-users")
     @Operation(
-            description = "Get All Users",
+            description = "Get All Users for Admin",
             summary = "Get All Users",
             responses = {
                     @ApiResponse(
@@ -84,7 +84,6 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-
     public ResponseEntity<ReqRes> getAllUsers() {
         return ResponseEntity.ok(userManagementService.getAllUsers());
     }
@@ -102,7 +101,6 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-
     public ResponseEntity<ReqRes> getUserById(@PathVariable long userId) {
         return ResponseEntity.ok(userManagementService.getUserById(userId));
     }
@@ -120,7 +118,6 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-
     public ResponseEntity<ReqRes> updateUser(@PathVariable long userId, @RequestBody Users req) {
         return ResponseEntity.ok(userManagementService.updateUser(userId, req));
     }
@@ -138,12 +135,11 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-
     public ResponseEntity<ReqRes> deleteUser(@PathVariable long userId) {
         return ResponseEntity.ok(userManagementService.deleteUser(userId));
     }
 
-    @GetMapping("/adminuser/get-profile")
+    @GetMapping("/user/view-profile/{userId}")
     @Operation(
             description = "View Profile",
             summary = "View Profile",
@@ -156,11 +152,75 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
+    public ResponseEntity<ReqRes> viewProfile(@PathVariable long userId) {
+        return ResponseEntity.ok(userManagementService.getUserById(userId));
+    }
 
-    public ResponseEntity<ReqRes> getMyProfile() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        ReqRes res = userManagementService.getMyInfo(email);
-        return ResponseEntity.status(res.getStatusCode()).body(res);
+    @PutMapping("/user/update-profile/{userId}")
+    @Operation(
+            description = "Update Profile",
+            summary = "Update Profile",
+            responses = {
+                    @ApiResponse(
+                            description = "Successful",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403")
+            })
+    public ResponseEntity<ReqRes> updateProfile(@PathVariable long userId, @RequestBody Users req) {
+        return ResponseEntity.ok(userManagementService.updateUser(userId, req));
+    }
+
+    @GetMapping("/service/get-email/{userId}")
+    @Operation(
+            description = "Get Email",
+            summary = "Get Email",
+            responses = {
+                    @ApiResponse(
+                            description = "Successful",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403")
+            })
+    public String getEmail(@PathVariable long userId) {
+        return userManagementService.getEmail(userId);
+    }
+
+    @GetMapping("/service/get-name/{userId}")
+    @Operation(
+            description = "Get Name",
+            summary = "Get Name",
+            responses = {
+                    @ApiResponse(
+                            description = "Successful",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403")
+            })
+    public String getName(@PathVariable long userId) {
+        return userManagementService.getName(userId);
+    }
+
+    @GetMapping("/service/get-all-users")
+    @Operation(
+            description = "Get All Users",
+            summary = "Get All Users",
+            responses = {
+                    @ApiResponse(
+                            description = "Successful",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403")
+            })
+    public List<Users> getAllUsersByRole() {
+        return userManagementService.getAllUsersByRole();
     }
 }
