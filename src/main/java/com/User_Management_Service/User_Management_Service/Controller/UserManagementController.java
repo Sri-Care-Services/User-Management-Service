@@ -207,7 +207,7 @@ public class UserManagementController {
         return userManagementService.getName(userId);
     }
 
-    @GetMapping("/service/get-all-users")
+    @GetMapping("/service/get-all-customers")
     @Operation(
             description = "Get All Users",
             summary = "Get All Users",
