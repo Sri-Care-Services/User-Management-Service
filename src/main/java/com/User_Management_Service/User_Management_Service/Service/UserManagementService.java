@@ -197,6 +197,6 @@ public class UserManagementService {
     }
 
     public List<Users> getAllUsersByRole() {
-        return usersRepo.findAllByRole("USER");
+        return usersRepo.findAllByRole("CUSTOMER");
     }
 }
