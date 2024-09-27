@@ -1,12 +1,12 @@
 package com.User_Management_Service.User_Management_Service.Controller;
 
+import com.User_Management_Service.User_Management_Service.DTO.LoginDTO;
 import com.User_Management_Service.User_Management_Service.DTO.ReqRes;
+import com.User_Management_Service.User_Management_Service.DTO.RegisterDTO;
 import com.User_Management_Service.User_Management_Service.Entity.Users;
 import com.User_Management_Service.User_Management_Service.Service.UserManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,7 +33,7 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-    public ResponseEntity<ReqRes> register(@RequestBody ReqRes reg) {
+    public ResponseEntity<ReqRes> register(@RequestBody RegisterDTO reg) {
         return ResponseEntity.ok(userManagementService.register(reg));
     }
 
@@ -50,7 +50,7 @@ public class UserManagementController {
                             description = "Unauthorized / Invalid Token",
                             responseCode = "403")
             })
-    public ResponseEntity<ReqRes> login(@RequestBody ReqRes req) {
+    public ResponseEntity<ReqRes> login(@RequestBody LoginDTO req) {
         return ResponseEntity.ok(userManagementService.login(req));
     }
 

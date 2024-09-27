@@ -1,6 +1,8 @@
 package com.User_Management_Service.User_Management_Service.Service;
 
+import com.User_Management_Service.User_Management_Service.DTO.LoginDTO;
 import com.User_Management_Service.User_Management_Service.DTO.ReqRes;
+import com.User_Management_Service.User_Management_Service.DTO.RegisterDTO;
 import com.User_Management_Service.User_Management_Service.Entity.Users;
 import com.User_Management_Service.User_Management_Service.Repository.UsersRepo;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,7 @@ public class UserManagementService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
-    public ReqRes register(ReqRes registrationRequest) {
+    public ReqRes register(RegisterDTO registrationRequest) {
         ReqRes resp = new ReqRes();
         try {
             Users Users = new Users();
@@ -44,7 +46,7 @@ public class UserManagementService {
         return resp;
     }
 
-    public ReqRes login(ReqRes loginRequest) {
+    public ReqRes login(LoginDTO loginRequest) {
         ReqRes resp = new ReqRes();
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
