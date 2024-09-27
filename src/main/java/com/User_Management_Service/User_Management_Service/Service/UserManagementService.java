@@ -57,7 +57,7 @@ public class UserManagementService {
             resp.setRole(user.getRole());
             resp.setRefreshToken(refreshToken);
             resp.setExpirationTime("24Hrs");
-            resp.setMessage("Login Successfully");
+            resp.setMessage("Logged in Successfully");
         } catch (Exception e) {
             resp.setStatusCode(500);
             resp.setError(e.getMessage());
@@ -76,7 +76,7 @@ public class UserManagementService {
                 resp.setToken(jwt);
                 resp.setRefreshToken(refreshTokenRequest.getRefreshToken());
                 resp.setExpirationTime("24Hrs");
-                resp.setMessage("Token Refresh Successfully");
+                resp.setMessage("Token Refreshed Successfully");
             }
         } catch (Exception e) {
             resp.setStatusCode(500);
@@ -92,7 +92,7 @@ public class UserManagementService {
             if (!result.isEmpty()) {
                 resp.setUsersList(result);
                 resp.setStatusCode(200);
-                resp.setMessage("Successfully");
+                resp.setMessage("Successful");
             } else {
                 resp.setStatusCode(404);
                 resp.setMessage("No users found");
@@ -110,7 +110,7 @@ public class UserManagementService {
             Users userById = usersRepo.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
             resp.setUsers(userById);
             resp.setStatusCode(200);
-            resp.setMessage("Users with id " + id + "found Successfully");
+            resp.setMessage("User with id " + id + " found Successfully");
 
         } catch (Exception e) {
             resp.setStatusCode(500);
@@ -198,5 +198,10 @@ public class UserManagementService {
 
     public List<Users> getAllUsersByRole() {
         return usersRepo.findAllByRole("CUSTOMER");
+    }
+
+    public String getPhoneNumber(long userId) {
+        Optional<Users> usersOptional = usersRepo.findById(userId);
+        return usersOptional.map(Users::getPhoneNumber).orElse("User not found");
     }
 }

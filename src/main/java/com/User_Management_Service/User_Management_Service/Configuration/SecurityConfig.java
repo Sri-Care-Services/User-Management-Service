@@ -34,8 +34,7 @@ public class SecurityConfig {
                         .requestMatchers("/service/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/api-docs/**").permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/user/**").hasAnyAuthority("CUSTOMER", "EMPLOYEE")
-                        .requestMatchers("/adminuser/**").hasAnyAuthority("ADMIN", "CUSTOMER", "EMPLOYEE")
+                        .requestMatchers("/user/**").hasAnyAuthority("CUSTOMER", "EMPLOYEE", "ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(

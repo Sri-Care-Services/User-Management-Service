@@ -190,6 +190,23 @@ public class UserManagementController {
         return userManagementService.getEmail(userId);
     }
 
+    @GetMapping("/service/get-phoneNumber/{userId}")
+    @Operation(
+            description = "Get Phone Number",
+            summary = "Get Phone Number",
+            responses = {
+                    @ApiResponse(
+                            description = "Successful",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403")
+            })
+    public String getPhoneNumber(@PathVariable long userId) {
+        return userManagementService.getPhoneNumber(userId);
+    }
+
     @GetMapping("/service/get-name/{userId}")
     @Operation(
             description = "Get Name",
@@ -209,8 +226,8 @@ public class UserManagementController {
 
     @GetMapping("/service/get-all-customers")
     @Operation(
-            description = "Get All Users",
-            summary = "Get All Users",
+            description = "Get All Customers",
+            summary = "Get All Customers",
             responses = {
                     @ApiResponse(
                             description = "Successful",
