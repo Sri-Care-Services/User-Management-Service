@@ -1,5 +1,6 @@
 package com.User_Management_Service.User_Management_Service.Service;
 
+import com.User_Management_Service.User_Management_Service.Entity.Users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,8 +26,10 @@ public class JwtUtils {
     }
 
     public String generateToken(UserDetails userDetails) {
+        Users user = (Users) userDetails;
         return Jwts.builder()
                 .subject(userDetails.getUsername())
+                .claim("userId", user.getId())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(Key)
@@ -34,8 +37,10 @@ public class JwtUtils {
     }
 
     public String generateRefreshToken(HashMap<String, Object> claims, UserDetails userDetails) {
+        Users user = (Users) userDetails;
         return Jwts.builder()
                 .subject(userDetails.getUsername())
+                .claim("userId", user.getId())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(Key)
