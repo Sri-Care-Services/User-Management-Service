@@ -31,6 +31,7 @@ public class UserManagementService {
             Users.setCity(registrationRequest.getCity());
             Users.setRole(registrationRequest.getRole());
             Users.setName(registrationRequest.getName());
+            Users.setPhoneNumber(registrationRequest.getPhoneNumber());
             Users.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
 
             Users UsersResult = usersRepo.save(Users);

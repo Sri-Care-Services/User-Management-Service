@@ -13,4 +13,5 @@ public class RegisterDTO {
     private String city;
     private String role;
     private String password;
+    private String phoneNumber;
 }

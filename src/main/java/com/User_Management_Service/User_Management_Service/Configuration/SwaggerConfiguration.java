@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Sri Care Backend API",
+                title = "User Management Service",
                 version = "1.0",
                 description = "API documentation for the Sri Care Backend",
                 contact = @Contact(
